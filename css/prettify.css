@@ -127,7 +127,7 @@ b {
     color: #333333;
     font: 18px/30px Lato, sans-serif;
     font-weight: 400;
-    text-align: center
+    text-align: center;
 }
 
 .emoji {
@@ -173,21 +173,24 @@ header h2 {
     flex: 1;
     margin: 0 auto;
     width: 100%;
-    max-width: 650px
+    max-width: 900px
 }
 
-#user-form,
-.result {
+#user-form {
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     padding: 0;
-    position: relative
+    position: relative;
+    transition: boxshadow 0.3s ease;
 }
 
-.login-field {
+textarea {
+    resize: none;
+}
+.paste-field {
     border: 4px solid #eee;
     border-radius: 1px;
     box-shadow: 0;
@@ -197,13 +200,14 @@ header h2 {
     font-weight: 300;
     margin: 0;
     width: 100%;
+    height: 50%;
     padding: 10px 10px;
-    transition: border-color 0.3s ease
+    transition: border-color 0.3s ease;
 }
 
-.login-field:focus {
-    border-color: #2ecc71;
-    outline: none
+.paste-field:focus {
+    border-color: rgba(51, 51, 51, 0.7);
+    outline: none;
 }
 
 .submit-btn {
