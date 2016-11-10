@@ -1,15 +1,21 @@
-<html lang="en">
+
+
+<html lang="en" ng-app="racketPrettify">
 	<head>
+		<title>Racket Prettify</title>
 		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 		<link href='css/prettify.css' rel='stylesheet' type='text/css'>
 
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script type="text/javascript" src="js/prettify.js"></script>
+
 	</head>
 
-	<body class="main">
+	<body class="main" ng-controller="mainCtrl">
 		<header>
 		      <h1><span class="light-h1">(<span class="spec-form">define</span> (</span>Racket-Prettify
 		      	  <span class="light-h1"> code) ...)</span></h1>
-		      <h2></h2>
+		      <h2>{{text}}</h2>
 		</header>
 
 		  <div role="main" class="content">
