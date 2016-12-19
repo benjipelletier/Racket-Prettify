@@ -6,22 +6,27 @@
 		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 		<link href='css/prettify.css' rel='stylesheet' type='text/css'>
 
+		<!--
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	-->
+		<script type="text/javascript" src="js/angular/angular.min.js"></script>
+
 		<script type="text/javascript" src="js/prettify.js"></script>
 
 	</head>
-
 	<body class="main" ng-controller="mainCtrl">
 		<header>
 		      <h1><span class="light-h1">(<span class="spec-form">define</span> (</span>Racket-Prettify
 		      	  <span class="light-h1"> code) ...)</span></h1>
-		      <h2>{{text}}</h2>
+		      <h2>{{heading}}</h2>
 		</header>
 
 		  <div role="main" class="content">
       <div id='user-form' action="">
-        <textarea spellcheck="false" id='login' name="login" placeholder="Paste your Racket code here" class="paste-field"></textarea>
+        <textarea spellcheck="false" ng-model="text" id='login' name="login" placeholder="Paste your Racket code here" class="paste-field"></textarea>
+
     </div>
+    <button class="button" ng-click="submit(text)">Prettify</button>
 
     </div>
 	</body>

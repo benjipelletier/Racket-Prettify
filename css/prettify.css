@@ -210,6 +210,17 @@ textarea {
     outline: none;
 }
 
+.button {
+    background-color: #333333;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 2px;
+    width: 100px;
+    height: 40px;
+    margin-top: 20px;
+    
+}
 .submit-btn {
     display: none
 }
