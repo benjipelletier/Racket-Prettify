@@ -3,16 +3,17 @@ var app = angular.module('racketPrettify', []);
 app.controller('mainCtrl', ['$scope', function($scope) {
 
 	$scope.heading = "Make your Racket code 'pretty'";
-	$scope.linesArr = [];
 
 	$scope.submit = function(text) {
-		$scope.linesArr = text.split("\n");
-		for (i in $scope.linesArr) {
-			console.log($scope.linesArr[i]);
+		var linesArr = text.split("\n");
+		var newArr = [];
+		for (i in linesArr) {
+			linesArr.concat(breakLines(linesArr[i]));
 		}
+		console.log(linesArr)
 	}
 
-console.log(breakLines("      (overlay (rest lower) upper (add1 row) (cons (first lower) acc))"));
+
 	function breakLines(line) {
 		var brokenLines = [];
 		var max = 0;
@@ -20,13 +21,12 @@ console.log(breakLines("      (overlay (rest lower) upper (add1 row) (cons (firs
 		if (line.length >= 70) {
 			for (var i = 1; i < 70; i++) {
 				var diff = splitDiffNum(line, i);
-				console.log(diff)
 				if (diff >= max) {
 					max = diff;
 					index = i;
 				}
 			}
-			var spaces = index - max - 1;
+			var spaces = index - max;
 			brokenLines = [line.substring(0, index)];
 			return brokenLines.concat(breakLines(addSpaces(spaces, line.substring(index))));
 		}
@@ -46,31 +46,35 @@ console.log(breakLines("      (overlay (rest lower) upper (add1 row) (cons (firs
 		var letter = line.substring(index, index+1);
 		var preLetter = line.substring(index-1, index);
 		var endLetter = null;
-		var count = 0;
+		var count = 1;
+		var tempCount = -1;
 		if ((letter == "(" || preLetter == " ") && letter != " ") {
 			var isLetter = false;
-			var isParen = false;
+			var isParen = 0;
 			for (i = index-1; i >= 0; i--) {
 				var current = line.substring(i, i+1);
-				if (!isLetter && !isParen) {
-					if (current == ")") {
-						isParen = 1;
-					}
-					else if (current != " ") {
-						isLetter = true;
-					}
-				} else if (isLetter) {
-					if (current == "(" || current == " ") { 
-						break;
-					}
+
+				if (i != 0) {
+					var prev = line.substring(i-1, i);
 				} else {
-					if (current == ")") {
-						isParen++;
-					} else if (current == "(") {
-						isParen--;
-					}
-					if (isParen == 0) {
-						break;
+					var prev = null;
+				}
+
+				if (current == ")" || current == "]") {
+					isParen++;
+				} else if (current == "(" || current == "[") {
+					isParen--;
+				}
+
+				if (isParen == 0 && prev == " " && current != " ") {
+						tempCount = count;
+
+				} else if (isParen < 0) {
+					if (tempCount == -1) {
+						return count-1;
+					} else {
+						return tempCount;
+
 					}
 				}
 				count++;
