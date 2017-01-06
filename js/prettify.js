@@ -8,11 +8,10 @@ app.controller('mainCtrl', ['$scope', function($scope) {
 		var linesArr = text.split("\n");
 		var newArr = [];
 		for (i in linesArr) {
-			linesArr.concat(breakLines(linesArr[i]));
+			newArr = newArr.concat(breakLines(linesArr[i]));
 		}
-		console.log(linesArr)
+		console.log(newArr)
 	}
-
 
 	function breakLines(line) {
 		var brokenLines = [];
@@ -48,7 +47,7 @@ app.controller('mainCtrl', ['$scope', function($scope) {
 		var endLetter = null;
 		var count = 1;
 		var tempCount = -1;
-		if ((letter == "(" || preLetter == " ") && letter != " ") {
+		if ((letter == "(" || letter == "[" || preLetter == " ") && letter != " ") {
 			var isLetter = false;
 			var isParen = 0;
 			for (i = index-1; i >= 0; i--) {
